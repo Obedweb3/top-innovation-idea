@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenPulse Campus — Campus Spark 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-dark: #0a2e1a;
+      --green-mid: #1a5c35;
+      --green-bright: #2ecc71;
+      --green-lime: #a8e63d;
+      --amber: #f5a623;
+      --amber-light: #ffd166;
+      --cream: #f7f3e9;
+      --white: #ffffff;
+      --text-dark: #0a1a0e;
+      --text-muted: #4a6b55;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--green-dark);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,46,26,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(46,204,113,0.15);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.3rem;
+      color: var(--green-lime);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(247,243,233,0.7); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-lime); }
+    .nav-cta {
+      background: var(--green-bright); color: var(--green-dark);
+      padding: 0.55rem 1.4rem; border-radius: 100px;
+      font-weight: 700; font-size: 0.85rem; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--green-lime); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 50%, rgba(46,204,113,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(168,230,61,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 10%, rgba(245,166,35,0.06) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(46,204,113,1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,204,113,1) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(46,204,113,0.15);
+      border: 1px solid rgba(46,204,113,0.3);
+      padding: 0.4rem 1rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 500; color: var(--green-bright);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green-bright);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800; line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    h1 .highlight {
+      color: var(--green-lime);
+      position: relative; display: inline-block;
+    }
+    h1 .highlight::after {
+      content: '';
+      position: absolute; bottom: 4px; left: 0; right: 0; height: 4px;
+      background: var(--amber); border-radius: 2px;
+    }
+    h1 .amber { color: var(--amber); }
+    .hero-sub {
+      font-size: 1.2rem; color: rgba(247,243,233,0.7);
+      max-width: 580px; line-height: 1.7; margin-bottom: 3rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--green-bright); color: var(--green-dark);
+      padding: 0.9rem 2rem; border-radius: 100px;
+      font-weight: 700; font-size: 1rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--green-lime); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,204,113,0.3); }
+    .btn-outline {
+      border: 1.5px solid rgba(247,243,233,0.3); color: var(--cream);
+      padding: 0.9rem 2rem; border-radius: 100px;
+      font-weight: 500; font-size: 1rem; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--green-lime); color: var(--green-lime); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 5rem;
+      padding-top: 3rem; border-top: 1px solid rgba(46,204,113,0.15);
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800; color: var(--green-lime);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.85rem; color: rgba(247,243,233,0.5); margin-top: 0.3rem; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PROBLEM ── */
+    .section {
+      padding: 6rem 4rem;
+      position: relative;
+    }
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--green-bright);
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+
+    .problem-section { background: var(--green-dark); }
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .problem-text p {
+      color: rgba(247,243,233,0.7); line-height: 1.8; margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+    .problem-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .problem-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(46,204,113,0.12);
+      border-radius: 16px; padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .problem-card:hover {
+      border-color: rgba(46,204,113,0.3);
+      background: rgba(255,255,255,0.06);
+    }
+    .problem-icon {
+      font-size: 1.8rem; flex-shrink: 0;
+      width: 48px; height: 48px;
+      background: rgba(46,204,113,0.1); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .problem-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem;
+    }
+    .problem-card p { font-size: 0.88rem; color: rgba(247,243,233,0.55); line-height: 1.6; }
+
+    /* ── SOLUTION ── */
+    .solution-section { background: rgba(26,92,53,0.2); }
+    .solution-inner { max-width: 1100px; margin: 0 auto; }
+    .solution-header { text-align: center; margin-bottom: 4rem; }
+    .solution-header p { color: rgba(247,243,233,0.65); max-width: 600px; margin: 0 auto; font-size: 1.05rem; line-height: 1.7; }
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .idea-card {
+      background: rgba(10,46,26,0.6);
+      border: 1px solid rgba(46,204,113,0.15);
+      border-radius: 20px; padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .idea-card:hover { transform: translateY(-4px); border-color: var(--green-bright); }
+    .idea-card.featured {
+      border-color: var(--green-bright);
+      background: rgba(46,204,113,0.08);
+    }
+    .idea-card.featured::before {
+      content: '★ TOP PICK';
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--amber); color: var(--green-dark);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+    }
+    .idea-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 700; color: var(--green-bright);
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .idea-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .idea-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .idea-card p { font-size: 0.9rem; color: rgba(247,243,233,0.6); line-height: 1.7; margin-bottom: 1rem; }
+    .idea-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: rgba(46,204,113,0.12);
+      border: 1px solid rgba(46,204,113,0.2);
+      color: var(--green-bright);
+      font-size: 0.72rem; font-weight: 500;
+      padding: 0.25rem 0.65rem; border-radius: 100px;
+    }
+
+    /* ── FEATURED IDEA DEEP DIVE ── */
+    .deep-dive { background: var(--green-dark); }
+    .deep-dive-inner { max-width: 1100px; margin: 0 auto; }
+    .deep-header { margin-bottom: 3rem; }
+    .deep-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 3rem; }
+    .deep-left {}
+    .deep-left p { color: rgba(247,243,233,0.7); line-height: 1.8; font-size: 1rem; margin-bottom: 1.5rem; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .feature-list li {
+      display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .feature-list li::before {
+      content: '→';
+      color: var(--green-bright); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .feature-list li span { color: rgba(247,243,233,0.75); font-size: 0.95rem; line-height: 1.6; }
+    .deep-right {}
+    .impact-box {
+      background: rgba(46,204,113,0.08);
+      border: 1px solid rgba(46,204,113,0.2);
+      border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem;
+    }
+    .impact-box h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: var(--green-lime); margin-bottom: 1.2rem;
+    }
+    .impact-metric {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(46,204,113,0.1);
+    }
+    .impact-metric:last-child { border-bottom: none; }
+    .impact-metric .label { font-size: 0.85rem; color: rgba(247,243,233,0.55); }
+    .impact-metric .value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; color: var(--green-bright); font-size: 1.1rem;
+    }
+    .tech-stack {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px; padding: 2rem;
+    }
+    .tech-stack h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem;
+    }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .tech-pill {
+      background: rgba(168,230,61,0.1);
+      border: 1px solid rgba(168,230,61,0.2);
+      color: var(--green-lime);
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.4rem 0.9rem; border-radius: 8px;
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap-section { background: rgba(26,92,53,0.15); }
+    .roadmap-inner { max-width: 900px; margin: 0 auto; }
+    .roadmap-header { text-align: center; margin-bottom: 4rem; }
+    .timeline { position: relative; padding-left: 3rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 11px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--green-bright), rgba(46,204,113,0.1));
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 3rem;
+    }
+    .timeline-dot {
+      position: absolute; left: -2.5rem;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--green-dark); border: 2px solid var(--green-bright);
+      display: flex; align-items: center; justify-content: center;
+      top: 0.25rem;
+    }
+    .timeline-dot.active { background: var(--green-bright); }
+    .timeline-dot span { font-size: 0.65rem; font-weight: 700; color: var(--green-dark); }
+    .timeline-phase {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--amber); text-transform: uppercase; margin-bottom: 0.3rem;
+    }
+    .timeline-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .timeline-item p { font-size: 0.9rem; color: rgba(247,243,233,0.6); line-height: 1.7; }
+
+    /* ── APPLY CTA ── */
+    .apply-section {
+      background: var(--green-mid);
+      padding: 6rem 4rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .apply-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(168,230,61,0.12) 0%, transparent 60%);
+    }
+    .apply-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .apply-section h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1rem; }
+    .apply-section p { color: rgba(247,243,233,0.7); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+    .deadline-chip {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(245,166,35,0.2); border: 1px solid rgba(245,166,35,0.4);
+      color: var(--amber-light); padding: 0.5rem 1.2rem; border-radius: 100px;
+      font-size: 0.85rem; font-weight: 600; margin-bottom: 2rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: rgba(0,0,0,0.3);
+      padding: 2rem 4rem; text-align: center;
+      border-top: 1px solid rgba(46,204,113,0.1);
+    }
+    footer p { font-size: 0.85rem; color: rgba(247,243,233,0.35); }
+    footer a { color: var(--green-bright); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+      .section { padding: 4rem 1.5rem; }
+      .problem-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .deep-grid { grid-template-columns: 1fr; }
+      .apply-section { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem; }
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Green<span>Pulse</span> Campus</div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#solutions">Ideas</a></li>
+    <li><a href="#featured">Deep Dive</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ul>
+  <a href="https://forms.office.com/r/zNQsK9b8MR" target="_blank" class="nav-cta">Apply Now →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Campus Spark 2026 · Climate Action & Green Innovation</div>
+    <h1>
+      Tech-Driven<br/>
+      <span class="highlight">Green</span> Futures<br/>
+      for <span class="amber">Every Campus</span>
+    </h1>
+    <p class="hero-sub">
+      Five innovation ideas combining technology and sustainability to tackle Kenya's most pressing environmental challenges — from campus to country.
+    </p>
+    <div class="hero-actions">
+      <a href="#solutions" class="btn-primary">Explore Ideas ↓</a>
+      <a href="https://forms.office.com/r/zNQsK9b8MR" target="_blank" class="btn-outline">Apply by May 30 →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Innovation Ideas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Focus Areas Covered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Days to Deadline</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">NEIL Universities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem-section section" id="problem">
+  <div class="problem-grid">
+    <div class="problem-text reveal">
+      <div class="section-label">The Challenge</div>
+      <h2>Why Green Innovation Matters Now</h2>
+      <p>Kenya and East Africa face compounding climate threats — erratic rainfall, rising temperatures, mounting waste, and energy poverty — while universities remain largely disconnected from real-time environmental data.</p>
+      <p>Technology is the bridge. The next wave of African innovators must build systems that don't just monitor problems but actively solve them at scale.</p>
+    </div>
+    <div class="problem-cards reveal">
+      <div class="problem-card">
+        <div class="problem-icon">🌡️</div>
+        <div>
+          <h3>Rising Temperatures</h3>
+          <p>East Africa has warmed ~1.5°C since 1960 with projections of 2–4°C more by 2100, threatening food systems.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">💧</div>
+        <div>
+          <h3>Water Stress</h3>
+          <p>Over 40% of Kenyans lack reliable clean water access. Urban demand is growing faster than infrastructure.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🗑️</div>
+        <div>
+          <h3>Waste Crisis</h3>
+          <p>Nairobi generates 2,400 tonnes of solid waste daily with less than 40% reaching formal disposal sites.</p>
+        </div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⚡</div>
+        <div>
+          <h3>Energy Access</h3>
+          <p>Only 75% of Kenyans have electricity access, with rural communities relying on costly, polluting kerosene.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="solution-section section" id="solutions">
+  <div class="solution-inner">
+    <div class="solution-header reveal">
+      <div class="section-label">The Ideas</div>
+      <h2>Five Tech-Powered Innovations</h2>
+      <p>Each idea targets a real environmental problem using skills in Tech, Engineering & IT — and is designed to scale across NEIL's 20+ member universities.</p>
+    </div>
+    <div class="ideas-grid">
+
+      <div class="idea-card reveal">
+        <div class="idea-num">IDEA 01</div>
+        <span class="idea-emoji">🌞</span>
+        <h3>Smart Community Solar Microgrid Platform</h3>
+        <p>A mobile/web app enabling communities to collectively invest in, manage, and share solar energy using IoT sensors and AI optimization.</p>
+        <div class="idea-tags">
+          <span class="tag">Renewable Energy</span>
+          <span class="tag">IoT</span>
+          <span class="tag">AI</span>
+        </div>
+      </div>
+
+      <div class="idea-card reveal">
+        <div class="idea-num">IDEA 02</div>
+        <span class="idea-emoji">♻️</span>
+        <h3>AI-Powered Waste Sorting & Recycling Network</h3>
+        <p>Photograph your waste, AI identifies how to sort/recycle it, and connects users to nearby collectors with rewards via airtime or points.</p>
+        <div class="idea-tags">
+          <span class="tag">Waste Management</span>
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Mobile</span>
+        </div>
+      </div>
+
+      <div class="idea-card reveal">
+        <div class="idea-num">IDEA 03</div>
+        <span class="idea-emoji">💧</span>
+        <h3>IoT Water Conservation & Quality Monitor</h3>
+        <p>Low-cost sensors in water sources and pipes send real-time alerts on leaks, contamination, or overuse via a dashboard app.</p>
+        <div class="idea-tags">
+          <span class="tag">Water Conservation</span>
+          <span class="tag">IoT Sensors</span>
+          <span class="tag">Dashboard</span>
+        </div>
+      </div>
+
+      <div class="idea-card reveal">
+        <div class="idea-num">IDEA 04</div>
+        <span class="idea-emoji">🌾</span>
+        <h3>Climate-Smart Farming Advisory App</h3>
+        <p>An AI chatbot (SMS/USSD-compatible) advising smallholder farmers on weather, drought-resistant crops, and sustainable practices.</p>
+        <div class="idea-tags">
+          <span class="tag">Sustainable Agriculture</span>
+          <span class="tag">AI Chatbot</span>
+          <span class="tag">SMS/USSD</span>
+        </div>
+      </div>
+
+      <div class="idea-card featured reveal">
+        <div class="idea-num">IDEA 05</div>
+        <span class="idea-emoji">🏫</span>
+        <h3>Campus Green Footprint Tracker</h3>
+        <p>A university platform that tracks campus carbon footprint across energy, water, waste, and transport — and gamifies sustainability challenges among students.</p>
+        <div class="idea-tags">
+          <span class="tag">All Areas</span>
+          <span class="tag">Gamification</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">Universities</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section class="deep-dive section" id="featured">
+  <div class="deep-dive-inner">
+    <div class="deep-header reveal">
+      <div class="section-label">Deep Dive · Top Pick</div>
+      <h2>Campus Green Footprint Tracker</h2>
+    </div>
+    <div class="deep-grid">
+      <div class="deep-left reveal">
+        <p>A real-time sustainability intelligence platform built for NEIL universities. Students, faculty, and facilities teams all interact with a unified dashboard that turns invisible environmental data into visible, actionable insight.</p>
+        <p>The platform gamifies sustainability — students earn points for eco-actions, compete in inter-hall challenges, and unlock rewards. Administrators get compliance reports and carbon reduction benchmarks.</p>
+        <ul class="feature-list">
+          <li><span>Real-time energy & water consumption monitoring via IoT sensors across campus buildings</span></li>
+          <li><span>AI-powered recommendations to reduce each department's carbon footprint</span></li>
+          <li><span>Gamified student challenges with leaderboards and tangible rewards</span></li>
+          <li><span>Inter-university sustainability ranking across all NEIL member schools</span></li>
+          <li><span>Automated ESG reports for university administration and donors</span></li>
+          <li><span>Waste audit module — track, categorize, and divert campus waste streams</span></li>
+        </ul>
+      </div>
+      <div class="deep-right reveal">
+        <div class="impact-box">
+          <h3>📊 Projected Impact Metrics</h3>
+          <div class="impact-metric">
+            <span class="label">Universities reachable (NEIL)</span>
+            <span class="value">20+</span>
+          </div>
+          <div class="impact-metric">
+            <span class="label">Estimated students reached</span>
+            <span class="value">50,000+</span>
+          </div>
+          <div class="impact-metric">
+            <span class="label">Potential energy savings</span>
+            <span class="value">15–30%</span>
+          </div>
+          <div class="impact-metric">
+            <span class="label">Carbon data points/day</span>
+            <span class="value">10,000+</span>
+          </div>
+          <div class="impact-metric">
+            <span class="label">Deployment timeline</span>
+            <span class="value">6 months</span>
+          </div>
+        </div>
+        <div class="tech-stack">
+          <h3>🛠 Technology Stack</h3>
+          <div class="tech-pills">
+            <span class="tech-pill">React / Next.js</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">IoT (MQTT)</span>
+            <span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill">TensorFlow</span>
+            <span class="tech-pill">PWA</span>
+            <span class="tech-pill">REST API</span>
+            <span class="tech-pill">Chart.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section section" id="roadmap">
+  <div class="roadmap-inner">
+    <div class="roadmap-header reveal">
+      <div class="section-label">The Plan</div>
+      <h2>Innovation Roadmap</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot active"><span>✓</span></div>
+        <div class="timeline-phase">Phase 1 · Now</div>
+        <h3>Concept & Research</h3>
+        <p>Problem validation through surveys across 3 NEIL universities. Stakeholder interviews with facilities managers, students, and sustainability officers. Technology scoping and stack selection.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 2 · Month 1–2</div>
+        <h3>MVP Development</h3>
+        <p>Build core dashboard with energy and water tracking. Deploy pilot IoT sensors in one university building. Launch student-facing PWA with basic gamification and leaderboard.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 3 · Month 3–4</div>
+        <h3>Pilot & Iteration</h3>
+        <p>Run 90-day pilot at pilot university. Collect real-world usage data. Iterate on UX based on student feedback. Add waste audit and transport tracking modules.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase 4 · Month 5–6</div>
+        <h3>Scale Across NEIL Network</h3>
+        <p>Onboard 5 additional NEIL universities. Launch inter-university sustainability competition. Publish first Kenya Campus Sustainability Index. Pitch for Series A funding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<section class="apply-section">
+  <div class="apply-inner">
+    <div class="deadline-chip">⏰ Deadline Extended — 30th May 2026</div>
+    <h2>Ready to Be the Student Innovator of the Year?</h2>
+    <p>Submit your innovation to Campus Spark 2026. Open to all students at NEIL member universities across Kenya and East Africa.</p>
+    <a href="https://forms.office.com/r/zNQsK9b8MR" target="_blank" class="btn-primary" style="font-size:1.1rem; padding: 1rem 2.5rem; display:inline-flex;">
+      Apply Now at Campus Spark →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Built for <a href="https://forms.office.com/r/zNQsK9b8MR" target="_blank">Campus Spark 2026</a> · NEIL Network · Climate Action & Green Innovation Track · Deadline: 30th May 2026</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Countdown to deadline
+  const deadline = new Date('2026-05-30T23:59:59');
+  const statNums = document.querySelectorAll('.stat-num');
+  const now = new Date();
+  const diff = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+  if (statNums[2]) statNums[2].textContent = diff > 0 ? diff : '0';
+</script>
+</body>
+</html>
